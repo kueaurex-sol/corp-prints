@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./GlitchText.css";
+import "./Glitchtext.css";
 
 /**
  * A one-time glitch burst for a heading, not a looping effect. Mounts
