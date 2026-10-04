@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink;
+  }
+}
+
+/* Segmented toggle thumb - position is set inline via CSS variable per selection */
+.toggle-thumb {
+  transform: translateX(var(--thumb-x, 0));
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Registration-mark dots used as the signature motif near the toggle */
+.reg-dot {
+  animation: register-in 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
