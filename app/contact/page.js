@@ -120,7 +120,7 @@ export default function ContactPage() {
     >
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 py-16 md:grid-cols-2 md:gap-16 md:py-24">
         {/* Left: headline + teaser + footer-style info */}
-        <section className="flex flex-col justify-between animate-rise-in">
+        <section className="flex flex-col animate-rise-in">
           <div>
             <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-ink md:text-6xl">
               Tell us what
@@ -134,7 +134,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-8 text-sm">
+          <div className="mt-8 grid grid-cols-2 gap-8 text-sm">
             <MapCard className="mt-10 col-span-2" />
             <div>
               <h3 className="font-display text-ink">Location</h3>

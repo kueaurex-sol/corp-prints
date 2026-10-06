@@ -21,7 +21,7 @@ const PRINT_EASE = [0.16, 1, 0.3, 1];
 // Add more entries for more passes, e.g. ["100%","0%","100%","0%","100%"].
 // const SWEEP = ["100%", "0%", "100%"];
 // Number of left↔right passes the chip makes during ONE top → bottom drop.
-const SWEEP_PASSES = 3;
+const SWEEP_PASSES = 2;
 
 // Builds ["0%","100%","0%","100%","0%","100%"]: starts at the left edge and,
 // with an odd number of passes, lands in the bottom-right corner.
