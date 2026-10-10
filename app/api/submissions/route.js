@@ -3,6 +3,7 @@ import connectDB from "@/lib/mongodb";
 import Submission from "@/models/Submission";
 import { uploadWebFiles } from "@/lib/cloudinaryUpload";
 import sendEmail from "@/lib/sendEmail";
+import { SIZE_UNITS } from "@/lib/sizeUnits";
 import {
   enquiryConfirmationTemplate,
   customOrderConfirmationTemplate,
@@ -103,7 +104,9 @@ export async function POST(request) {
       const {
         gstNo,
         solutionLookingFor,
-        size,
+        sizeWidth,
+        sizeHeight,
+        sizeUnit,
         quantity,
         requestDescription,
         dropRequestOrWhatsapp,
@@ -114,6 +117,36 @@ export async function POST(request) {
       if (!solutionLookingFor) {
         return NextResponse.json({ message: "solutionLookingFor is required for a custom order" }, { status: 400 });
       }
+
+      // ---- Size check (this is the new part) ----
+      let width, height, sizeLabel;
+      const hasW = sizeWidth !== undefined && sizeWidth !== "";
+      const hasH = sizeHeight !== undefined && sizeHeight !== "";
+
+      // Only check if the customer filled at least one of the two boxes
+      if (hasW || hasH) {
+        width = Number(sizeWidth);
+        height = Number(sizeHeight);
+
+        // Both boxes must be filled, and both must be numbers above 0
+        if (!hasW || !hasH || !(width > 0) || !(height > 0)) {
+          return NextResponse.json(
+            { message: "Enter both width and height as numbers greater than 0" },
+            { status: 400 }
+          );
+        }
+        // The unit must be one from our list (ft, in, cm, mm, m)
+        if (!SIZE_UNITS.includes(sizeUnit)) {
+          return NextResponse.json(
+            { message: `sizeUnit must be one of: ${SIZE_UNITS.join(", ")}` },
+            { status: 400 }
+          );
+        }
+        // Readable text for emails, e.g. "6 x 4 ft"
+        sizeLabel = `${width} x ${height} ${sizeUnit}`;
+      }
+      // -------------------------------------------
+
       if (!pickupOrDelivery || !["pickup", "delivery"].includes(pickupOrDelivery)) {
         return NextResponse.json({ message: "pickupOrDelivery must be 'pickup' or 'delivery'" }, { status: 400 });
       }
@@ -133,7 +166,10 @@ export async function POST(request) {
       submissionData.gstNo = gstNo;
       submissionData.customOrderRequest = {
         solutionLookingFor,
-        size,
+        size: sizeLabel,
+        sizeWidth: width,
+        sizeHeight: height,
+        sizeUnit: sizeLabel ? sizeUnit : undefined,
         quantity,
         artwork,
         endProductInspiration,
@@ -142,7 +178,6 @@ export async function POST(request) {
       };
       submissionData.deliveryDetails = { pickupOrDelivery, deliveryAddress };
     }
-
     const submission = await Submission.create(submissionData);
 
     // Fire the thank-you email (non-blocking failure)
@@ -156,12 +191,16 @@ export async function POST(request) {
     sendEmail(submission.email, subject, html);
 
     // Notify the client/business inbox with the full submission details
-    const clientEmail = process.env.CLIENT_EMAIL || process.env.EMAIL_USER;
-    sendEmail(
-      clientEmail,
-      `New ${type === "enquiry" ? "Enquiry" : "Custom Order"} submitted - ${submission.name}`,
-      clientNotificationTemplate(submission)
-    );
+      const clientEmail = process.env.CLIENT_EMAIL || process.env.EMAIL_USER;
+
+    await Promise.allSettled([
+      sendEmail(submission.email, subject, html),
+      sendEmail(
+        clientEmail,
+        `New ${type === "enquiry" ? "Enquiry" : "Custom Order"} submitted - ${submission.name}`,
+        clientNotificationTemplate(submission)
+      ),
+    ]);
 
     return NextResponse.json({ message: "Submission received successfully.", submission }, { status: 201 });
   } catch (err) {

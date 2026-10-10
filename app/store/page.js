@@ -1,11 +1,12 @@
-import React from 'react'
 
-function page() {
+import StorePreview from "@/components/store/StorePreview";
+
+export const metadata = { title: "Store | Corp Prints" };
+
+export default function StorePage() {
   return (
-    <div className='h-screen w-screen flex justify-center items-center'>
-<p className='text-xl font-semibold'>Launching Soon </p>
-    </div>
-  )
+    <main className="relative min-h-screen overflow-x-clip bg-paper pb-24 pt-32 md:pt-40">
+      <StorePreview />
+    </main>
+  );
 }
-
-export default page

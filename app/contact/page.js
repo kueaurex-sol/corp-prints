@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import MapCard from "@/components/contact/MapCard";
+import { SIZE_UNITS, DEFAULT_SIZE_UNIT } from "@/lib/sizeUnits";
 
 const SOLUTIONS = [
   "Flex Printing",
@@ -24,7 +25,9 @@ const emptyEnquiry = { issueRequest: "" };
 const emptyCustom = {
   gstNo: "",
   solutionLookingFor: "",
-  size: "",
+    sizeWidth: "",
+  sizeHeight: "",
+  sizeUnit: DEFAULT_SIZE_UNIT,
   quantity: "",
   requestDescription: "",
   dropRequestOrWhatsapp: "",
@@ -328,7 +331,7 @@ export default function ContactPage() {
                     </Field>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  {/* <div className="grid grid-cols-2 gap-4">
                     <Field label="Size">
                       <input
                         value={custom.size}
@@ -345,7 +348,55 @@ export default function ContactPage() {
                         placeholder="e.g. 10"
                       />
                     </Field>
+                  </div> */}
+                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <Field label="Width">
+                      <input
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputMode="decimal"
+                        value={custom.sizeWidth}
+                        onChange={updateCustom("sizeWidth")}
+                        className={inputClass}
+                        placeholder="e.g. 6"
+                      />
+                    </Field>
+                    <Field label="Height">
+                      <input
+                        type="number"
+                        min="0"
+                        step="any"
+                        inputMode="decimal"
+                        value={custom.sizeHeight}
+                        onChange={updateCustom("sizeHeight")}
+                        className={inputClass}
+                        placeholder="e.g. 4"
+                      />
+                    </Field>
+                    <Field label="Unit">
+                      <select
+                        value={custom.sizeUnit}
+                        onChange={updateCustom("sizeUnit")}
+                        className={inputClass}
+                      >
+                        {SIZE_UNITS.map((u) => (
+                          <option key={u} value={u}>
+                            {u}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
                   </div>
+
+                  <Field label="Quantity">
+                    <input
+                      value={custom.quantity}
+                      onChange={updateCustom("quantity")}
+                      className={inputClass}
+                      placeholder="e.g. 10"
+                    />
+                  </Field>
 
                   <div className="grid grid-cols-1 gap-4">
                     <Field label="Artwork">

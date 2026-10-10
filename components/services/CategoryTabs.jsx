@@ -10,6 +10,9 @@ export default function CategoryTabs() {
   const [active, setActive] = useState(SERVICES[0].slug);
   const activeCategory = SERVICES.find((c) => c.slug === active);
   const activeIndex = SERVICES.findIndex((c) => c.slug === active);
+  const INKS = ["#00AEEF", "#EC008C", "#FFF200", "#14151A"];
+  // text colour that stays readable on each ink (yellow gets dark text)
+  const INK_TEXT = ["text-paper", "text-paper", "text-ink", "text-paper"];
 
   return (
     <div>
@@ -31,7 +34,13 @@ export default function CategoryTabs() {
                   style={{ background: INKS[i % INKS.length] }}
                 />
               )}
-              <span className={`relative z-10 ${isActive ? "text-paper" : "text-ink/60 hover:text-ink"}`}>
+              <span
+                className={`relative z-10 ${
+                  isActive
+                    ? INK_TEXT[i % INK_TEXT.length]
+                    : "text-ink/60 hover:text-ink"
+                }`}
+              >
                 {cat.name}
               </span>
             </button>
@@ -42,8 +51,14 @@ export default function CategoryTabs() {
       {/* stacked-card content area, echoing the aceternity tabs deck look */}
       <div className="relative mt-8">
         {/* decorative cards peeking out behind the active panel */}
-        <div className="absolute inset-x-4 -top-3 h-full rounded-[2rem] border border-ink/10 bg-white/60" aria-hidden="true" />
-        <div className="absolute inset-x-8 -top-6 h-full rounded-[2rem] border border-ink/10 bg-white/40" aria-hidden="true" />
+        <div
+          className="absolute inset-x-4 -top-3 h-full rounded-[2rem] border border-ink/10 bg-white/60"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-x-8 -top-6 h-full rounded-[2rem] border border-ink/10 bg-white/40"
+          aria-hidden="true"
+        />
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -57,7 +72,9 @@ export default function CategoryTabs() {
             <p className="font-display text-xs uppercase tracking-[0.25em] text-ink/40">
               0{activeIndex + 1} — {activeCategory.types.length} services
             </p>
-            <h3 className="mt-2 font-display text-2xl text-ink md:text-3xl">{activeCategory.name}</h3>
+            <h3 className="mt-2 font-display text-2xl text-ink md:text-3xl">
+              {activeCategory.name}
+            </h3>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {activeCategory.types.map((t) => (
@@ -67,7 +84,9 @@ export default function CategoryTabs() {
                   className="group rounded-2xl border border-ink/10 bg-white/70 p-5 transition-colors hover:border-ink/30 hover:bg-white"
                 >
                   <h4 className="font-display text-base text-ink">{t.name}</h4>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink/60">{t.description}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink/60">
+                    {t.description}
+                  </p>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-ink/40 transition-colors group-hover:text-ink">
                     Request a quote <span aria-hidden="true">→</span>
                   </span>

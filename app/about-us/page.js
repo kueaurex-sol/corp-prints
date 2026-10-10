@@ -31,8 +31,8 @@ export default function AboutPage() {
       <MissionVision />
       {/* <BrandJourney /> */}
       <BrandJourneyScrollStory />
-      <AboutGallery />
-      <Cta />
+      {/* <AboutGallery /> */}
+      {/* <Cta /> */}
     </main>
   );
 }

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { SIZE_UNITS } from "@/lib/sizeUnits";
 
 export const SOLUTION_OPTIONS = [
   "Flex Printing",
@@ -58,7 +59,10 @@ const SubmissionSchema = new mongoose.Schema(
           return this.type === "custom_order";
         },
       },
-      size: { type: String },
+           size: { type: String }, // readable label, e.g. "6 x 4 ft"
+      sizeWidth: { type: Number, min: 0 },
+      sizeHeight: { type: Number, min: 0 },
+      sizeUnit: { type: String, enum: SIZE_UNITS },
       quantity: { type: String },
       artwork: [ImageSchema], // uploaded images
       endProductInspiration: [ImageSchema], // uploaded images

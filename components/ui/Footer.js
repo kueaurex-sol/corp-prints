@@ -233,18 +233,21 @@ const STOPS = [
 
 const COMPANY = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/about-us" },
   { label: "Services", href: "/services" },
   { label: "Store", href: "/store" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
 
 const SERVICES = [
-  { n: "01", title: "Printing", href: "/services#printing", dot: "bg-cyan" },
-  { n: "02", title: "Branding Solutions", href: "/services#branding", dot: "bg-magenta" },
-  { n: "03", title: "Signage & Display Systems", href: "/services#signage", dot: "bg-yellow" },
-  { n: "04", title: "Cutting, Engraving & Fabrication", href: "/services#fabrication", dot: "bg-ink" },
-  { n: "05", title: "Lighting & Structural Installations", href: "/services#lighting", dot: "bg-cyan" },
+  { n: "01", title: "Flex Printing", href: "/services", dot: "bg-cyan" },
+  { n: "02", title: "Vinyl Printing", href: "/services", dot: "bg-magenta" },
+  { n: "03", title: "UV Printing", href: "/services", dot: "bg-yellow" },
+  { n: "04", title: "Branding Solutions", href: "/services", dot: "bg-ink" },
+  { n: "05", title: "Signage & Display Systems", href: "/services", dot: "bg-cyan" },
+  { n: "05", title: "Laser Cutting", href: "/services", dot: "bg-magenta" },
+  { n: "05", title: "CNC Cutting", href: "/services", dot: "bg-yellow" },
 ];
 
 function bellHeights(n, peak, valley) {
