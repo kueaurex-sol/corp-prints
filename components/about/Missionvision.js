@@ -1,4 +1,3 @@
-
 "use client";
 import Image from "next/image";
 import bg from "./mission-vision-bg.png";
@@ -22,7 +21,7 @@ function Statement({ index, label, text }) {
           <span key={c} className="h-full flex-1" style={{ background: c }} />
         ))}
       </div>
-      <p className="mt-4 text-base leading-relaxed text-ink md:text-lg">
+      <p className="mt-4 text-base leading-relaxed text-ink text-md">
         {text}
       </p>
     </div>
@@ -52,16 +51,16 @@ export default function MissionVision() {
           <div className="flex max-w-xl flex-col gap-8">
             {/* headline over the photo */}
             <div className="text-paper">
-              <p className="font-display text-xs uppercase tracking-[0.25em] text-paper/60">
+              {/* <p className="font-display text-xs uppercase tracking-[0.25em] text-paper/60">
                 Who We Are
-              </p>
+              </p> */}
               <h2 className="mt-1 font-display text-2xl leading-tight tracking-tight ">
-                What we work toward, and why.
+                Purpose & Precision
               </h2>
-              <p className="mt-1 text-sm leading-relaxed text-paper/70 md:text-base">
+              {/* <p className="mt-1 text-sm leading-relaxed text-paper/70 md:text-base">
                 Two statements that guide every project, from a single sign to a
                 full installation.
-              </p>
+              </p> */}
             </div>
 
             {/* white card, now stacked under the headline on the same side */}
@@ -69,12 +68,12 @@ export default function MissionVision() {
               <div className="space-y-7">
                 <Statement
                   label="Mission"
-                  text="To bridge creative design with advanced fabrication technology, delivering durable, high-impact visual communication assets for corporate, retail and event clientele."
+                  text="To elevate brand identities by making the translation from concept to reality a seamless, precision-driven experience. We integrate advanced fabrication technology and cutting-edge print solutions to deliver high-impact visual communication that brings your exact design to life. "
                 />
                 <div className="h-px w-full bg-ink/10" />
                 <Statement
                   label="Vision"
-                  text="To be the first call for visual branding and fabrication — where every printed, lit, or built surface carries a brand's identity without compromise."
+                  text="To be the first choice for visual branding, serving as the ultimate bridge between creative concepts and physical reality. We want to be the premier infrastructure provider for the visual branding sector, ensuring that every printed, illuminated, and fabricated space reflects your brand without compromise. "
                 />
               </div>
             </div>

@@ -76,17 +76,17 @@ function SkeletonCard({ i }) {
     >
       {/* image area */}
       <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-ink/[0.05]">
-        <div aria-hidden className="absolute inset-0 opacity-[0.07]" style={HALFTONE} />
+        {/* <div aria-hidden className="absolute inset-0 opacity-[0.07]" style={HALFTONE} /> */}
 
         {/* faint registration mark in the middle */}
-        <svg
+        {/* <svg
           aria-hidden
           viewBox="0 0 24 24"
           className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 text-ink/15"
         >
           <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" strokeWidth="1" />
           <path d="M12 1V23M1 12H23" stroke="currentColor" strokeWidth="1" />
-        </svg>
+        </svg> */}
 
         <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-white/80 px-2.5 py-1.5">
           <span className={`h-1.5 w-1.5 rounded-full ${DOTS[i % 4]}`} />
@@ -205,7 +205,7 @@ function LaunchBanner() {
       <div aria-hidden className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-cyan/40 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-28 right-0 h-80 w-80 rounded-full bg-magenta/35 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/3 h-56 w-56 -translate-x-1/2 rounded-full bg-yellow/20 blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]" style={HALFTONE_LIGHT} />
+      {/* <div aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.07]" style={HALFTONE_LIGHT} /> */}
 
       {/* ticker */}
       <div className="relative overflow-hidden border-b border-white/10 py-3">
@@ -228,13 +228,13 @@ function LaunchBanner() {
 
       <div className="relative grid items-center gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:px-12 md:py-16">
         <div>
-          <p className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] backdrop-blur">
+          {/* <p className="inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-magenta opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-magenta" />
             </span>
             Store status: launching soon
-          </p>
+          </p> */}
 
           <h2
             id="launch-title"

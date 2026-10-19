@@ -25,7 +25,7 @@ const emptyEnquiry = { issueRequest: "" };
 const emptyCustom = {
   gstNo: "",
   solutionLookingFor: "",
-    sizeWidth: "",
+  sizeWidth: "",
   sizeHeight: "",
   sizeUnit: DEFAULT_SIZE_UNIT,
   quantity: "",
@@ -112,7 +112,7 @@ export default function ContactPage() {
   const isCustom = type === "custom_order";
 
   return (
-        <main
+    <main
       className="min-h-screen bg-paper"
       style={{
         backgroundImage: "url('/backgrounds/print-hero.svg')",
@@ -126,14 +126,13 @@ export default function ContactPage() {
         <section className="flex flex-col animate-rise-in">
           <div>
             <h1 className="font-display text-4xl leading-[1.1] tracking-tight text-ink md:text-6xl">
-              Tell us what
-              <br />
-              you're printing.
+              Let's Bring Your Vision to Life.
             </h1>
             <p className="mt-6 max-w-sm text-base leading-relaxed text-ink/70">
-              From a single signage panel to a full branding rollout — send us
-              the details and we'll come back with a plan, a price, and a
-              timeline.
+              Great spaces deserve exceptional visual solutions. From
+              high-impact signage and precision UV printing to illuminated
+              displays and bespoke fabrication. Let's discuss what you have in
+              mind.
             </p>
           </div>
 
@@ -349,7 +348,7 @@ export default function ContactPage() {
                       />
                     </Field>
                   </div> */}
-                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                     <Field label="Width">
                       <input
                         type="number"

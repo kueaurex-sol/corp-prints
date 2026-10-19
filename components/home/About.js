@@ -1,9 +1,21 @@
 import Reveal from "./Reveal";
 
 const PILLARS = [
-  { c: "bg-cyan", t: "Design", d: "Artwork and layouts prepared for the material they will be produced on." },
-  { c: "bg-magenta", t: "Fabricate", d: "UV, vinyl, flex, laser and CNC work under one roof." },
-  { c: "bg-yellow", t: "Install", d: "Facades, hoardings, arches and lighting, fitted and finished." },
+  {
+    c: "bg-cyan",
+    t: "Design",
+    d: "Artwork and layouts prepared for the material they will be produced on.",
+  },
+  {
+    c: "bg-magenta",
+    t: "Fabricate",
+    d: "UV, vinyl, flex, laser and CNC work under one roof.",
+  },
+  {
+    c: "bg-yellow",
+    t: "Install",
+    d: "Facades, hoardings, arches and lighting, fitted and finished.",
+  },
 ];
 
 export default function About() {
@@ -12,14 +24,17 @@ export default function About() {
       <div className="grid gap-12 md:grid-cols-2 md:gap-16">
         <Reveal>
           <h2 className="font-display text-3xl leading-tight tracking-tight text-ink md:text-5xl">
-            Creative design, joined to fabrication technology.
+            We intended to build your brands visual communication.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="text-base leading-relaxed text-ink/70 md:text-lg">
-            Corp Prints is a visual branding and structural fabrication firm. We make durable,
-            high-impact visual communication for corporate, retail and event clients, from
-            white-ink UV printing and illuminated signage to architectural displays and structural lighting.
+            Corp Prints is a visual branding and structural fabrication Brand
+            that serves corporate, retail, and event clients. We specialize in
+            white-ink UV printing, custom signage, illuminated displays,
+            architectural installations, and structural lighting. From concept
+            to installation, we create durable, high-impact visual solutions
+            that transform spaces and enhance brand visibility.
           </p>
         </Reveal>
       </div>
@@ -27,7 +42,9 @@ export default function About() {
         {PILLARS.map((p, k) => (
           <Reveal key={p.t} delay={k * 0.1}>
             <div className="h-full rounded-3xl border border-ink/10 bg-white/70 p-7 backdrop-blur-sm">
-              <span className={`block h-3 w-3 rounded-full ${p.c} mix-blend-multiply`} />
+              <span
+                className={`block h-3 w-3 rounded-full ${p.c} mix-blend-multiply`}
+              />
               <h3 className="mt-6 font-display text-xl text-ink">{p.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink/60">{p.d}</p>
             </div>
