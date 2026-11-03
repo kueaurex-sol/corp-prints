@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 
+
 // Replace /public/gallery/*.jpg with real project photography.
 const ITEMS = [
   { title: "Flex & Vinyl", count: "12", img: "/gallery/1.jpg" },

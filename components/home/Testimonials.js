@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import useContent from "@/lib/useContent";
 import Reveal from "./Reveal";
 
 // Placeholder copy: swap for real client quotes and photos (image: "/testimonials/x.jpg")
-const ITEMS = [
+const FALLBACK = [
   {
     head: "Delivered before the launch",
     quote:
@@ -39,8 +40,9 @@ const ITEMS = [
   },
 ];
 const MS = 6000;
-
+const art = (x) => (x.img ? `url("${x.img}") center/cover` : x.g || "linear-gradient(135deg,#00AEEF,#fff)");
 export default function Testimonials() {
+  const ITEMS = useContent("/api/content/testimonials", FALLBACK);
   const [i, setI] = useState(0);
   const n = ITEMS.length;
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function Testimonials() {
     return () => clearTimeout(t);
   }, [i, n]);
   const at = (o) => ITEMS[(i + o + n) % n];
-  const t = ITEMS[i];
+  const t = ITEMS[i % n];
 
   const Side = ({ o, tall }) => (
     <button
@@ -58,7 +60,7 @@ export default function Testimonials() {
     >
       <span
         className="block h-full w-full rounded-[1.4rem]"
-        style={{ background: at(o).g }}
+        style={{ background:art(at(o)) }}
       />
     </button>
   );

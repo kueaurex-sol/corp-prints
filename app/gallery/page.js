@@ -1,8 +1,10 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
-
+import useContent from "@/lib/useContent";
+const fetched = useContent("/api/content/gallery", RAW);
+const ITEMS = useMemo(() => decorate(fetched), [fetched]);
 /* ───────────────────────── Data ─────────────────────────
    Put real project photos at /public/gallery/*.jpg.
    Missing images fall back to a CMYK gradient. Titles/descriptions are drafts.
@@ -19,7 +21,7 @@ const M = "rgba(232,54,143,.35)";
 const Y = "rgba(255,196,0,.5)";
 const MESHES = [mesh(C, Y, M), mesh(M, C, Y), mesh(Y, M, C), mesh(C, M, Y)];
 
-const ITEMS = [
+const RAW = [
   { title: "Flex & Vinyl", tag: "Printing", desc: "Large-format banners, hoardings and wall graphics.", img: "/gallery/1.jpg", span: "col-span-2 md:col-span-2 md:row-span-2" },
   { title: "UV & White Ink", tag: "Printing", desc: "Crisp prints on acrylic, glass, ACP and fabric.", img: "/gallery/2.jpg", span: "" },
   { title: "Glow Signage", tag: "Signage", desc: "LED-lit and edge-glow acrylic sign boards.", img: "/gallery/3.jpg", span: "md:row-span-2" },
@@ -28,8 +30,15 @@ const ITEMS = [
   { title: "Facade Branding", tag: "Branding", desc: "Aluminum frames, facades and structural hoardings.", img: "/gallery/2.jpg", span: "md:col-span-2 md:row-span-2" },
   { title: "Fleet Wraps", tag: "Branding", desc: "Canter van displays and full vehicle graphics.", img: "/gallery/5.jpg", span: "" },
   { title: "Installations", tag: "Install", desc: "Arches, lighting works and on-site fitting.", img: "/gallery/3.jpg", span: "col-span-2 md:col-span-1" },
-].map((it, i) => ({ ...it, id: i, bg: MESHES[i % 4] }));
-
+];
+const SPANS = [
+  "col-span-2 md:col-span-2 md:row-span-2", "", "md:row-span-2", "",
+  "md:row-span-2", "md:col-span-2 md:row-span-2", "", "col-span-2 md:col-span-1",
+];
+const decorate = (list) => {
+  const full = Math.floor(list.length / 8) * 8;
+  return list.map((it, i) => ({ ...it, id: i, bg: MESHES[i % 4], span: i < full ? SPANS[i % 8] : "" }));
+};
 const DOTS = ["bg-cyan", "bg-magenta", "bg-yellow", "bg-ink"];
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -60,8 +69,8 @@ const tileVariants = {
 
 /* ───────────────────────── Lightbox ───────────────────────── */
 
-function Lightbox({ index, onClose, onNav }) {
-  const item = ITEMS[index];
+function Lightbox({ items, index, onClose, onNav }) {
+  const item = items[index];
 
   useEffect(() => {
     const onKey = (e) => {
@@ -130,7 +139,7 @@ function Lightbox({ index, onClose, onNav }) {
         <div className="p-5 sm:p-6">
           <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
             <span className={`h-2 w-2 rounded-full ${DOTS[index % 4]}`} />
-            Fig. {pad(index + 1)} / {pad(ITEMS.length)} · {item.tag}
+            Fig. {pad(index + 1)} / {pad(items.length)} · {item.tag}
           </p>
           <h3 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink">{item.title}</h3>
           <p className="mt-1 max-w-xl text-sm leading-relaxed text-ink/70">{item.desc}</p>
@@ -156,9 +165,9 @@ export default function AboutGallery() {
     };
   }, [selected]);
 
-  const nav = useCallback((dir) => {
-    setSelected((s) => (s === null ? s : (s + dir + ITEMS.length) % ITEMS.length));
-  }, []);
+const nav = useCallback((dir) => {
+  setSelected((s) => (s === null ? s : (s + dir + ITEMS.length) % ITEMS.length));
+}, [ITEMS.length]);
   const close = useCallback(() => setSelected(null), []);
 
   return (
@@ -252,6 +261,7 @@ export default function AboutGallery() {
       </div>
 
       {/* portal keeps the lightbox above the fixed navbar */}
+      {selected !== null && ITEMS[selected] && <Lightbox items={ITEMS} index={selected} onClose={close} onNav={nav} />}
       {mounted &&
         createPortal(
           <AnimatePresence>

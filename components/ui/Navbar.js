@@ -344,17 +344,17 @@ const CLIP = {
 const pad = (n) => String(n).padStart(2, "0");
 
 const BLUEPRINT = {
-  backgroundImage:
-    "linear-gradient(rgba(20,21,26,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(20,21,26,.05) 1px, transparent 1px)",
+  // backgroundImage:
+  //   "linear-gradient(rgba(20,21,26,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(20,21,26,.05) 1px, transparent 1px)",
   backgroundSize: "40px 40px",
-  WebkitMaskImage: "linear-gradient(to bottom, #000 30%, transparent)",
-  maskImage: "linear-gradient(to bottom, #000 30%, transparent)",
+  // WebkitMaskImage: "linear-gradient(to bottom, #000 30%, transparent)",
+  // maskImage: "linear-gradient(to bottom, #000 30%, transparent)",
 };
 const HALFTONE = {
-  backgroundImage: "radial-gradient(currentColor 1.3px, transparent 1.7px)",
+  // backgroundImage: "radial-gradient(currentColor 1.3px, transparent 1.7px)",
   backgroundSize: "14px 14px",
-  WebkitMaskImage: "linear-gradient(135deg, transparent 35%, #000 100%)",
-  maskImage: "linear-gradient(135deg, transparent 35%, #000 100%)",
+  // WebkitMaskImage: "linear-gradient(135deg, transparent 35%, #000 100%)",
+  // maskImage: "linear-gradient(135deg, transparent 35%, #000 100%)",
 };
 
 /* ───────────────────────── Focus trap ─────────────────────────
@@ -685,7 +685,7 @@ export default function Navbar() {
                   <li key={l.label} data-nv="link" className="flex items-baseline gap-3 sm:gap-4">
                     <span className="flex w-9 shrink-0 items-center gap-1.5 font-mono text-[11px] text-ink/40">
                       <i className={`h-1.5 w-1.5 rounded-full ${DOT_BG[i % 4]} ${isActive(l.href) ? "" : "opacity-40"}`} />
-                      {pad(i + 1)}
+                      {/* {pad(i + 1)} */}
                     </span>
                     <span className="font-display text-[clamp(2rem,min(11vw,7.5vh),4rem)] font-bold leading-none tracking-tight text-ink lg:text-[clamp(2.4rem,min(6.2vw,9.5vh),5.5rem)]">
                       <NavLinkHover
