@@ -3,8 +3,7 @@ import { useCallback, useEffect, useState, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import useContent from "@/lib/useContent";
-const fetched = useContent("/api/content/gallery", RAW);
-const ITEMS = useMemo(() => decorate(fetched), [fetched]);
+
 /* ───────────────────────── Data ─────────────────────────
    Put real project photos at /public/gallery/*.jpg.
    Missing images fall back to a CMYK gradient. Titles/descriptions are drafts.
@@ -154,7 +153,8 @@ function Lightbox({ items, index, onClose, onNav }) {
 export default function AboutGallery() {
   const [selected, setSelected] = useState(null);
   const [mounted, setMounted] = useState(false);
-
+const fetched = useContent("/api/content/gallery", RAW);
+const ITEMS = useMemo(() => decorate(fetched), [fetched]);
   useEffect(() => setMounted(true), []);
 
   // lock page scroll while the lightbox is open
@@ -261,7 +261,7 @@ const nav = useCallback((dir) => {
       </div>
 
       {/* portal keeps the lightbox above the fixed navbar */}
-      {selected !== null && ITEMS[selected] && <Lightbox items={ITEMS} index={selected} onClose={close} onNav={nav} />}
+      {/* {selected !== null && ITEMS[selected] && <Lightbox items={ITEMS} index={selected} onClose={close} onNav={nav} />} */}
       {mounted &&
         createPortal(
           <AnimatePresence>
