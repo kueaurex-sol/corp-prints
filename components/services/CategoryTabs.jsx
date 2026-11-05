@@ -51,14 +51,16 @@ export default function CategoryTabs() {
       {/* stacked-card content area, echoing the aceternity tabs deck look */}
       <div className="relative mt-8">
         {/* decorative cards peeking out behind the active panel */}
-        <div
-          className="absolute inset-x-4 -top-3 h-full rounded-[2rem] border border-ink/10 bg-white/60"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-x-8 -top-6 h-full rounded-[2rem] border border-ink/10 bg-white/40"
-          aria-hidden="true"
-        />
+        {/* furthest back: tallest */}
+<div
+  className="absolute inset-x-10 -top-8 bottom-0 z-0 rounded-[2rem] border border-ink/10 bg-white/60"
+  aria-hidden="true"
+/>
+{/* middle */}
+<div
+  className="absolute inset-x-5 -top-4 bottom-0 z-10 rounded-[2rem] border border-ink/10 bg-white/85 shadow-[0_10px_30px_-20px_rgba(20,21,26,0.25)]"
+  aria-hidden="true"
+/>
 
         <AnimatePresence mode="wait">
           <motion.div
@@ -67,7 +69,7 @@ export default function CategoryTabs() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative rounded-[2rem] border border-ink/10 bg-paper p-6 shadow-[0_30px_80px_-40px_rgba(20,21,26,0.3)] md:p-10"
+            className="relative rounded-[2rem] border z-20 border-ink/10 bg-paper p-6 shadow-[0_30px_80px_-40px_rgba(20,21,26,0.3)] md:p-10"
           >
             <p className="font-display text-xs uppercase tracking-[0.25em] text-ink/40">
               0{activeIndex + 1} — {activeCategory.types.length} services

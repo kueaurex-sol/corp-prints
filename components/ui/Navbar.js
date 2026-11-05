@@ -320,7 +320,7 @@ const SOCIALS = [
   { label: "LinkedIn", href: "#", icon: "linkedin" },
 ];
 
-const TAGLINE = "Visual branding & structural fabrication.";
+// const TAGLINE = "Visual branding & structural fabrication.";
 const LOCATION = "Hyderabad, Telangana";
 
 const CMYK = ["#00B8D9", "#E8368F", "#FFC400", "#14151A"];
@@ -671,11 +671,12 @@ export default function Navbar() {
             {/* top: eyebrow + tagline */}
             <div className="flex flex-col gap-1">
               <p data-nv="meta" className="font-mono text-xs uppercase tracking-[0.25em] text-ink/50">
-                Corp Prints <span className="text-ink/30">/</span> Menu
+                {/* Corp Prints <span className="text-ink/30">/</span>  */}
+                Menu
               </p>
-              <p data-nv="meta" className="text-sm text-ink/60">
+              {/* <p data-nv="meta" className="text-sm text-ink/60">
                 {TAGLINE}
-              </p>
+              </p> */}
             </div>
 
             {/* middle: links + images */}
